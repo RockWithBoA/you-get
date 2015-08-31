@@ -27,3 +27,5 @@ README.rst
 *.DS_Store
 *.swp
 *~
+
+urls.txt
