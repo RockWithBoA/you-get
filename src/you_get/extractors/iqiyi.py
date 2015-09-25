@@ -11,22 +11,23 @@ import hashlib
 
 '''
 Changelog:
--> http://www.iqiyi.com/common/flashplayer/20150810/MainPlayer_5_2_26_c3_3_7_1.swf
-   http://www.iqiyi.com/common/flashplayer/20150811/MainPlayer_5_2_26_c3_3_7_2.swf
-   http://www.iqiyi.com/common/flashplayer/20150820/MainPlayer_5_2_27_2_c3_3_7_3.swf
+-> http://www.iqiyi.com/common/flashplayer/20150916/MainPlayer_5_2_28_c3_3_7_4.swf
+   use @fffonion 's method in #617.
+   Add trace AVM(asasm) code in Iqiyi's encode function where the salt is put into the encode array and reassemble by RABCDasm(or WinRABCDasm),then use Fiddler to response modified file to replace the src file with its AutoResponder function ,set browser Fiddler proxy and play with !debug version! Flash Player ,finially get result in flashlog.txt(its location can be easily found in search engine).
+   Code Like (without letters after #comment:),it just do the job : trace("{IQIYI_SALT}:"+salt_array.join(""))
+   ```(Postion After getTimer)
+     findpropstrict      QName(PackageNamespace(""), "trace")
+     pushstring          "{IQIYI_SALT}:" #comment for you to locate the salt
+     getscopeobject      1
+     getslot             17 #comment: 17 is the salt slots number defined in code
+     pushstring          ""
+     callproperty        QName(Namespace("http://adobe.com/AS3/2006/builtin"), "join"), 1
+     add
+     callpropvoid        QName(PackageNamespace(""), "trace"), 1
+   ```
+ 
+-> http://www.iqiyi.com/common/flashplayer/20150820/MainPlayer_5_2_27_2_c3_3_7_3.swf
     some small changes in Zombie.bite function
-
--> http://www.iqiyi.com/common/flashplayer/20150805/MainPlayer_5_2_26_c3_3_7.swf
-    former key still works until 20150809
-    In Zombie kcuf = [13, 3, 0, 15, 8, 2, 11, 7, 10, 1, 12, 9, 14, 6, 4, 5] ,which is construct in LogManager,CoreManager,impls.pub.setting,impls.pub.statistics,StageVideoManager
-              thd create a array of ['2', 'd', 'f', 'e', '0', 'c', '5', '3', '8', 'b', '9', '6', 'a', '7', '4', '1']
--> http://www.iqiyi.com/common/flashplayer/20150710/MainPlayer_5_2_25_c3_3_5_1.swf
-
--> http://www.iqiyi.com/common/flashplayer/20150703/MainPlayer_5_2_24_1_c3_3_3.swf
-    SingletonClass.ekam
-
--> http://www.iqiyi.com/common/flashplayer/20150618/MainPlayer_5_2_24_1_c3_3_2.swf
-    In this version Z7elzzup.cexe,just use node.js to run this code(with some modification) and get innerkey.
 
 '''
 
@@ -45,12 +46,12 @@ bid meaning for quality
 '''
 def mix(tvid):
     enc = []
-    enc.append('3cba91f1453145438ac5e4f5983bc086')
+    enc.append('eac64f22daf001da6ba9aa8da4d501508bbe90a4d4091fea3b0582a85b38c2cc')
     tm = str(randint(2000,4000))
     src = 'eknas'
     enc.append(str(tm))
     enc.append(tvid)
-    sc = hashlib.new('md5',bytes("".join(enc),'utf-8')).hexdigest()
+    sc = hashlib.new('md5',bytes(("".join(enc))[1:64:2]+tm+tvid,'utf-8')).hexdigest()
     return tm,sc,src
 
 def getVRSXORCode(arg1,arg2):
@@ -112,7 +113,7 @@ class Iqiyi(VideoExtractor):
                 "&tvId="+tvid+"&vid="+vid+"&vinfo=1&tm="+tm+\
                 "&enc="+sc+\
                 "&qyid="+uid+"&tn="+str(random()) +"&um=1" +\
-                "&authkey="+hashlib.new('md5',bytes(''+str(tm)+tvid,'utf-8')).hexdigest()
+                "&authkey="+hashlib.new('md5',bytes(hashlib.new('md5', b'').hexdigest()+str(tm)+tvid,'utf-8')).hexdigest()
         return json.loads(get_content(vmsreq))
 
 

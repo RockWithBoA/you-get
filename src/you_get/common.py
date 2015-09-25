@@ -963,6 +963,7 @@ def url_to_module(url):
     from .extractors import (
         acfun,
         alive,
+        archive,
         baidu,
         baomihua,
         bilibili,
@@ -998,6 +999,7 @@ def url_to_module(url):
         miomio,
         mixcloud,
         mtv81,
+        nanagogo,
         netease,
         nicovideo,
         pptv,
@@ -1041,6 +1043,7 @@ def url_to_module(url):
         '163': netease,
         '56': w56,
         'acfun': acfun,
+        'archive': archive,
         'baidu': baidu,
         'baomihua': baomihua,
         'bilibili': bilibili,
@@ -1078,6 +1081,7 @@ def url_to_module(url):
         'miomio': miomio,
         'mixcloud': mixcloud,
         'mtv81': mtv81,
+        '7gogo': nanagogo,
         'nicovideo': nicovideo,
         'pptv': pptv,
         'qianmo':qianmo,
@@ -1118,8 +1122,10 @@ def url_to_module(url):
         if location is None:
             from .extractors import embed
             return embed, url
-        else:
+        elif location != url:
             return url_to_module(location)
+        else:
+            raise NotImplementedError(url)
 
 def any_download(url, **kwargs):
     m, url = url_to_module(url)

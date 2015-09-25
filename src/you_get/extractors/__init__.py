@@ -2,6 +2,7 @@
 
 from .acfun import *
 from .alive import *
+from .archive import *
 from .baidu import *
 from .bilibili import *
 from .blip import *
@@ -34,6 +35,7 @@ from .miaopai import *
 from .miomio import *
 from .mixcloud import *
 from .mtv81 import *
+from .nanagogo import *
 from .netease import *
 from .nicovideo import *
 from .pptv import *

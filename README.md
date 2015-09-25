@@ -27,6 +27,7 @@ Fork me on GitHub: <https://github.com/soimort/you-get>
 * Twitter <http://twitter.com>
 * Youku (优酷) <http://www.youku.com>
 * YouTube <http://www.youtube.com>
+* 755 (ナナゴーゴー) <http://7gogo.jp>
 * AcFun <http://www.acfun.tv>
 * Alive.in.th <http://alive.in.th>
 * Baidu Music (百度音乐) <http://music.baidu.com>
@@ -46,6 +47,7 @@ Fork me on GitHub: <https://github.com/soimort/you-get>
 * Fun.tv (风行, Funshion) <http://www.fun.tv>
 * Google Drive <http://docs.google.com>
 * ifeng (凤凰视频) <http://v.ifeng.com>
+* Internet Archive <http://archive.org>
 * iQIYI (爱奇艺) <http://www.iqiyi.com>
 * iQilu (齐鲁网, 山东网络台) <http://v.iqilu.com>
 * Joy.cn (激动网) <http://www.joy.cn>
@@ -88,9 +90,8 @@ Fork me on GitHub: <https://github.com/soimort/you-get>
 * Python 3.2
 * Python 3.3
 * Python 3.4
+* Python 3.5
 * PyPy3
-
-`you-get` does not (and will never) work with Python 2.x.
 
 ### Dependencies (Optional but Recommended)
 
