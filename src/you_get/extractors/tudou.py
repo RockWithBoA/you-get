@@ -7,7 +7,7 @@ from xml.dom.minidom import parseString
 
 def tudou_download_by_iid(iid, title, output_dir = '.', merge = True, info_only = False):
     data = json.loads(get_decoded_html('http://www.tudou.com/outplay/goto/getItemSegs.action?iid=%s' % iid))
-    temp = max([data[i] for i in data if 'size' in data[i][0]], key=lambda x:x[0]["size"])
+    temp = max([data[i] for i in data if 'size' in data[i][0]], key=lambda x:sum([part['size'] for part in x]))
     vids, size = [t["k"] for t in temp], sum([t["size"] for t in temp])
     urls = [[n.firstChild.nodeValue.strip()
              for n in
@@ -73,7 +73,7 @@ def parse_playlist(url):
     url = 'http://www.tudou.com/playlist/service/getAlbumItems.html?aid='+aid
     return [(atitle + '-' + x['title'], str(x['itemId'])) for x in json.loads(get_html(url))['message']]
 
-def tudou_download_playlist(url, output_dir = '.', merge = True, info_only = False):
+def tudou_download_playlist(url, output_dir = '.', merge = True, info_only = False, **kwargs):
     videos = parse_playlist(url)
     for i, (title, id) in enumerate(videos):
         print('Processing %s of %s videos...' % (i + 1, len(videos)))
