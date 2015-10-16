@@ -12,8 +12,10 @@ from urllib import request, parse
 from .version import __version__
 from .util import log
 from .util.strings import get_filename, unescape_html
+from . import json_output as json_output_
 
 dry_run = False
+json_output = False
 force = False
 player = None
 extractor_proxy = None
@@ -519,6 +521,9 @@ def get_output_filename(urls, title, ext, output_dir, merge):
 
 def download_urls(urls, title, ext, total_size, output_dir='.', refer=None, merge=True, faker=False):
     assert urls
+    if json_output:
+        json_output_.download_urls(urls=urls, title=title, ext=ext, total_size=total_size, refer=refer)
+        return
     if dry_run:
         with open('urls.txt', 'w') as real_urls:
             print('\n'.join(urls), file=real_urls)
@@ -726,6 +731,9 @@ def playlist_not_supported(name):
     return f
 
 def print_info(site_info, title, type, size):
+    if json_output:
+        json_output_.print_info(site_info=site_info, title=title, type=type, size=size)
+        return
     if type:
         type = type.lower()
     if type in ['3gp']:
@@ -864,10 +872,11 @@ def script_main(script_name, download, download_playlist = None):
     -y | --extractor-proxy <HOST:PORT>       Use specific HTTP proxy for extracting stream data.
          --no-proxy                          Don't use any proxy. (ignore $http_proxy)
          --debug                             Show traceback on KeyboardInterrupt.
+         --json                              Output the information of videos in json text without downloading. 
     '''
 
     short_opts = 'Vhfiuc:nF:o:p:x:y:'
-    opts = ['version', 'help', 'force', 'info', 'url', 'cookies', 'no-merge', 'no-proxy', 'debug', 'format=', 'stream=', 'itag=', 'output-dir=', 'player=', 'http-proxy=', 'extractor-proxy=', 'lang=']
+    opts = ['version', 'help', 'force', 'info', 'url', 'cookies', 'no-merge', 'no-proxy', 'debug', 'json', 'format=', 'stream=', 'itag=', 'output-dir=', 'player=', 'http-proxy=', 'extractor-proxy=', 'lang=']
     if download_playlist:
         short_opts = 'l' + short_opts
         opts = ['playlist'] + opts
@@ -881,6 +890,7 @@ def script_main(script_name, download, download_playlist = None):
 
     global force
     global dry_run
+    global json_output
     global player
     global extractor_proxy
     global cookies_txt
@@ -909,6 +919,11 @@ def script_main(script_name, download, download_playlist = None):
             info_only = True
         elif o in ('-u', '--url'):
             dry_run = True
+        elif o in ('--json', ):
+            json_output = True
+            # to fix extractors not use VideoExtractor
+            dry_run = True
+            info_only = False
         elif o in ('-c', '--cookies'):
             from http import cookiejar
             cookies_txt = cookiejar.MozillaCookieJar(a)
@@ -945,14 +960,14 @@ def script_main(script_name, download, download_playlist = None):
     try:
         if stream_id:
             if not extractor_proxy:
-                download_main(download, download_playlist, args, playlist, stream_id=stream_id, output_dir=output_dir, merge=merge, info_only=info_only)
+                download_main(download, download_playlist, args, playlist, stream_id=stream_id, output_dir=output_dir, merge=merge, info_only=info_only, json_output=json_output)
             else:
-                download_main(download, download_playlist, args, playlist, stream_id=stream_id, extractor_proxy=extractor_proxy, output_dir=output_dir, merge=merge, info_only=info_only)
+                download_main(download, download_playlist, args, playlist, stream_id=stream_id, extractor_proxy=extractor_proxy, output_dir=output_dir, merge=merge, info_only=info_only, json_output=json_output)
         else:
             if not extractor_proxy:
-                download_main(download, download_playlist, args, playlist, output_dir=output_dir, merge=merge, info_only=info_only)
+                download_main(download, download_playlist, args, playlist, output_dir=output_dir, merge=merge, info_only=info_only, json_output=json_output)
             else:
-                download_main(download, download_playlist, args, playlist, extractor_proxy=extractor_proxy, output_dir=output_dir, merge=merge, info_only=info_only)
+                download_main(download, download_playlist, args, playlist, extractor_proxy=extractor_proxy, output_dir=output_dir, merge=merge, info_only=info_only, json_output=json_output)
     except KeyboardInterrupt:
         if traceback:
             raise
@@ -978,6 +993,7 @@ def url_to_module(url):
         douyutv,
         ehow,
         facebook,
+        flickr,
         freesound,
         funshion,
         google,
@@ -1058,6 +1074,7 @@ def url_to_module(url):
         'douyutv': douyutv,
         'ehow': ehow,
         'facebook': facebook,
+        'flickr': flickr,
         'freesound': freesound,
         'fun': funshion,
         'google': google,
