@@ -48,15 +48,19 @@ def universal_download(url, output_dir='.', merge=True, info_only=False, **kwarg
 
         # a link href to an image is often an interesting one
         urls += re.findall(r'href="(https?://[^"]+\.jpe?g)"', page)
+        urls += re.findall(r'href="(https?://[^"]+\.png)"', page)
+        urls += re.findall(r'href="(https?://[^"]+\.gif)"', page)
 
         # have some candy!
         candies = []
+        i = 1
         for url in set(urls):
             filename = parse.unquote(url.split('/')[-1])
-            if len(filename) >= 8:
+            if 5 <= len(filename) <= 80:
                 title = '.'.join(filename.split('.')[:-1])
             else:
-                title = page_title
+                title = '%s' % i
+                i += 1
 
             candies.append({'url': url,
                             'title': title})

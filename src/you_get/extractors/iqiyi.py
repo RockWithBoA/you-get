@@ -45,7 +45,7 @@ bid meaning for quality
 
 '''
 def mix(tvid):
-    salt = '2c76de15dcb44bd28ff0927d50d31620'
+    salt = '6967d2088d8843eea0ee38ad1a6f9173'
     tm = str(randint(2000,4000))
     sc = hashlib.new('md5', bytes(salt + tm + tvid, 'utf-8')).hexdigest()
     return tm, sc, 'eknas'
@@ -119,8 +119,12 @@ class Iqiyi(VideoExtractor):
 
         if self.url and not self.vid:
             html = get_html(self.url)
-            tvid = r1(r'data-player-tvid="([^"]+)"', html) or r1(r'tvid=([^&]+)', self.url)
-            videoid = r1(r'data-player-videoid="([^"]+)"', html) or r1(r'vid=([^&]+)', self.url)
+            tvid = r1(r'#curid=(.+)_', self.url) or \
+                   r1(r'tvid=([^&]+)', self.url) or \
+                   r1(r'data-player-tvid="([^"]+)"', html)
+            videoid = r1(r'#curid=.+_(.*)$', self.url) or \
+                      r1(r'vid=([^&]+)', self.url) or \
+                      r1(r'data-player-videoid="([^"]+)"', html)
             self.vid = (tvid, videoid)
 
         self.gen_uid=uuid4().hex

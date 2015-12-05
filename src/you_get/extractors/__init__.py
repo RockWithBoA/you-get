@@ -9,6 +9,7 @@ from .bilibili import *
 from .cbs import *
 from .cntv import *
 from .dailymotion import *
+from .dilidili import *
 from .douban import *
 from .douyutv import *
 from .ehow import *
@@ -36,9 +37,11 @@ from .miaopai import *
 from .miomio import *
 from .mixcloud import *
 from .mtv81 import *
+from .musicplayon import *
 from .nanagogo import *
 from .netease import *
 from .nicovideo import *
+from .pinterest import *
 from .pixnet import *
 from .pptv import *
 from .qianmo import *

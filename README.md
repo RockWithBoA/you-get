@@ -37,21 +37,29 @@ Interested? [Install it](#installation) now and [get started by examples](#getti
 
 Are you a Python programmer? Then check out [the source](https://github.com/soimort/you-get) and fork it!
 
+![](http://i.imgur.com/GfthFAz.png)
+
 ## Installation
 
 ### Prerequisites
+
+The following dependencies are required and must be installed separately, unless you are using a pre-built package on Windows:
 
 * **[Python 3](https://www.python.org/downloads/)**
 * **[FFmpeg](https://www.ffmpeg.org/)** (strongly recommended) or [Libav](https://libav.org/)
 * (Optional) [RTMPDump](https://rtmpdump.mplayerhq.hu/)
 
-### Option 1. Install the official release
+### Option 1: Install via pip
 
-The official release of `you-get` is distributed on [PyPI](https://pypi.python.org/pypi), and can be installed easily from a PyPI mirror via the [pip](https://en.wikipedia.org/wiki/Pip_\(package_manager\)) package manager. Note that you must use the Python 3 version of `pip`:
+The official release of `you-get` is distributed on [PyPI](https://pypi.python.org/pypi/you-get), and can be installed easily from a PyPI mirror via the [pip](https://en.wikipedia.org/wiki/Pip_\(package_manager\)) package manager. Note that you must use the Python 3 version of `pip`:
 
     $ pip3 install you-get
 
-### Option 2. Download from GitHub
+### Option 2: Use a pre-built package (Windows only)
+
+Download the `exe` (standalone) or `7z` (all dependencies included) from: <https://github.com/soimort/you-get/releases/latest>.
+
+### Option 3: Download from GitHub
 
 You may either download the [stable](https://github.com/soimort/you-get/archive/master.zip) (identical with the latest release on PyPI) or the [develop](https://github.com/soimort/you-get/archive/develop.zip) (more hotfixes, unstable features) branch of `you-get`. Unzip it, and put the directory containing the `you-get` script into your `PATH`.
 
@@ -63,7 +71,7 @@ $ make install
 
 to install `you-get` to a permanent path.
 
-### Option 3. Git clone
+### Option 4: Git clone
 
 This is the recommended way for all developers, even if you don't often code in Python.
 
@@ -177,38 +185,19 @@ Downloading rms.jpg ...
 Otherwise, `you-get` will scrape the web page and try to figure out if there's anything interesting to you:
 
 ```
-$ you-get http://www.wired.com/2012/11/time-lapse-within-worlds/
-Site:       wired.com
-Title:      Geminid-Meteor-over-Castle-Lake
-Type:       JPEG Image (image/jpeg)
-Size:       0.09 MiB (95581 Bytes)
+$ you-get http://kopasas.tumblr.com/post/69361932517
+Site:       Tumblr.com
+Title:      kopasas
+Type:       Unknown type (None)
+Size:       0.51 MiB (536583 Bytes)
 
-Downloading Geminid-Meteor-over-Castle-Lake.jpg ...
-100.0% (  0.1/0.1  MB) ├████████████████████████████████████████┤[1/1]  606 kB/s
+Site:       Tumblr.com
+Title:      tumblr_mxhg13jx4n1sftq6do1_1280
+Type:       Portable Network Graphics (image/png)
+Size:       0.51 MiB (536583 Bytes)
 
-Site:       wired.com
-Title:      Star-Trails-over-Mount-Shasta
-Type:       JPEG Image (image/jpeg)
-Size:       0.1 MiB (108263 Bytes)
-
-Downloading Star-Trails-over-Mount-Shasta.jpg ...
-100.0% (  0.1/0.1  MB) ├████████████████████████████████████████┤[1/1]  615 kB/s
-
-Site:       wired.com
-Title:      Milky-Way-and-Lyrid-Meteor-over-Crater-Lake
-Type:       JPEG Image (image/jpeg)
-Size:       0.1 MiB (104196 Bytes)
-
-Downloading Milky-Way-and-Lyrid-Meteor-over-Crater-Lake.jpg ...
-100.0% (  0.1/0.1  MB) ├████████████████████████████████████████┤[1/1]  643 kB/s
-
-Site:       wired.com
-Title:      Aurora-over-Crater-Lake
-Type:       JPEG Image (image/jpeg)
-Size:       0.08 MiB (87666 Bytes)
-
-Downloading Aurora-over-Crater-Lake.jpg ...
-100.0% (  0.1/0.1  MB) ├████████████████████████████████████████┤[1/1]  365 kB/s
+Downloading tumblr_mxhg13jx4n1sftq6do1_1280.png ...
+100.0% (  0.5/0.5  MB) ├████████████████████████████████████████┤[1/1]   22 MB/s
 ```
 
 **Note:**
@@ -308,6 +297,8 @@ Use `--url`/`-u` to get a list of downloadable resource URLs extracted from the 
 | **Tumblr**  | <https://www.tumblr.com/>     |✓|✓|✓|
 | TED         | <http://www.ted.com/>         |✓| | |
 | SoundCloud  | <https://soundcloud.com/>     | | |✓|
+| Pinterest   | <https://www.pinterest.com/>  | |✓| |
+| MusicPlayOn | <http://en.musicplayon.com/>  |✓| | |
 | MTV81       | <http://www.mtv81.com/>       |✓| | |
 | Mixcloud    | <https://www.mixcloud.com/>   | | |✓|
 | Metacafe    | <http://www.metacafe.com/>    |✓| | |
@@ -335,6 +326,7 @@ Use `--url`/`-u` to get a list of downloadable resource URLs extracted from the 
 | **Baidu<br/>百度贴吧** | <http://tieba.baidu.com/> |✓|✓| |
 | 爆米花网 | <http://www.baomihua.com/>     |✓| | |
 | **bilibili<br/>哔哩哔哩** | <http://www.bilibili.com/> |✓| | |
+| Dilidili | <http://www.dilidili.com/>     |✓| | |
 | 豆瓣     | <http://www.douban.com/>       | | |✓|
 | 斗鱼     | <http://www.douyutv.com/>      |✓| | |
 | 凤凰视频 | <http://v.ifeng.com/>          |✓| | |
