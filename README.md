@@ -55,11 +55,17 @@ The official release of `you-get` is distributed on [PyPI](https://pypi.python.o
 
     $ pip3 install you-get
 
-### Option 2: Use a pre-built package (Windows only)
+### Option 2: Install via [Antigen](https://github.com/zsh-users/antigen)
+
+Add the following line to your `.zshrc`:
+
+    antigen bundle soimort/you-get
+
+### Option 3: Use a pre-built package (Windows only)
 
 Download the `exe` (standalone) or `7z` (all dependencies included) from: <https://github.com/soimort/you-get/releases/latest>.
 
-### Option 3: Download from GitHub
+### Option 4: Download from GitHub
 
 You may either download the [stable](https://github.com/soimort/you-get/archive/master.zip) (identical with the latest release on PyPI) or the [develop](https://github.com/soimort/you-get/archive/develop.zip) (more hotfixes, unstable features) branch of `you-get`. Unzip it, and put the directory containing the `you-get` script into your `PATH`.
 
@@ -71,7 +77,7 @@ $ make install
 
 to install `you-get` to a permanent path.
 
-### Option 4: Git clone
+### Option 5: Git clone
 
 This is the recommended way for all developers, even if you don't often code in Python.
 
@@ -292,6 +298,7 @@ Use `--url`/`-u` to get a list of downloadable resource URLs extracted from the 
 | Vine        | <https://vine.co/>            |✓| | |
 | Vimeo       | <https://vimeo.com/>          |✓| | |
 | Vidto       | <http://vidto.me/>            |✓| | |
+| Videomega   | <http://videomega.tv/>        |✓| | |
 | Veoh        | <http://www.veoh.com/>        |✓| | |
 | **Tumblr**  | <https://www.tumblr.com/>     |✓|✓|✓|
 | TED         | <http://www.ted.com/>         |✓| | |
@@ -306,6 +313,7 @@ Use `--url`/`-u` to get a list of downloadable resource URLs extracted from the 
 | JPopsuki TV | <http://www.jpopsuki.tv/>     |✓| | |
 | Internet Archive | <https://archive.org/>   |✓| | |
 | **Instagram** | <https://instagram.com/>    |✓|✓| |
+| Imgur       | <http://imgur.com/>           | |✓| |
 | Heavy Music Archive | <http://www.heavy-music.ru/> | | |✓|
 | **Google+** | <https://plus.google.com/>    |✓|✓| |
 | Freesound   | <http://www.freesound.org/>   | | |✓|

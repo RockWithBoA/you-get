@@ -21,6 +21,7 @@ from .funshion import *
 from .google import *
 from .heavymusic import *
 from .ifeng import *
+from .imgur import *
 from .instagram import *
 from .interest import *
 from .iqilu import *
@@ -57,6 +58,7 @@ from .tudou import *
 from .tumblr import *
 from .twitter import *
 from .veoh import *
+from .videomega import *
 from .vimeo import *
 from .vine import *
 from .vk import *
