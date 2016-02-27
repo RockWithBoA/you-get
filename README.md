@@ -72,7 +72,13 @@ You may either download the [stable](https://github.com/soimort/you-get/archive/
 Alternatively, run
 
 ```
-$ make install
+$ [sudo] python3 setup.py install
+```
+
+Or
+
+```
+$ python3 setup.py install --user
 ```
 
 to install `you-get` to a permanent path.
@@ -85,7 +91,7 @@ This is the recommended way for all developers, even if you don't often code in 
 $ git clone git://github.com/soimort/you-get.git
 ```
 
-Then put the cloned directory into your `PATH`, or run `make install` to install `you-get` to a permanent path.
+Then put the cloned directory into your `PATH`, or run `./setup.py install` to install `you-get` to a permanent path.
 
 ## Upgrading
 
@@ -353,6 +359,7 @@ Use `--url`/`-u` to get a list of downloadable resource URLs extracted from the 
 | 齐鲁网   | <http://v.iqilu.com/>          |✓| | |
 | QQ<br/>腾讯视频 | <http://v.qq.com/>      |✓| | |
 | 阡陌视频 | <http://qianmo.com/>           |✓| | |
+| THVideo  | <http://thvideo.tv/>           |✓| | |
 | Sina<br/>新浪视频<br/>微博秒拍视频 | <http://video.sina.com.cn/><br/><http://video.weibo.com/> |✓| | |
 | Sohu<br/>搜狐视频 | <http://tv.sohu.com/> |✓| | |
 | 天天动听 | <http://www.dongting.com/>     | | |✓|

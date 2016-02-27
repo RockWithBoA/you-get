@@ -94,13 +94,14 @@ def netease_video_download(vinfo, output_dir='.', info_only=False):
 
 def netease_song_download(song, output_dir='.', info_only=False):
     title = "%s. %s" % (song['position'], song['name'])
+    songNet = 'p' + song['mp3Url'].split('/')[2][1:]
 
     if 'hMusic' in song and song['hMusic'] != None:
-        url_best = make_url(song['hMusic']['dfsId'])
+        url_best = make_url(songNet, song['hMusic']['dfsId'])
     elif 'mp3Url' in song:
         url_best = song['mp3Url']
     elif 'bMusic' in song:
-        url_best = make_url(song['bMusic']['dfsId'])
+        url_best = make_url(songNet, song['bMusic']['dfsId'])
 
     netease_download_common(title, url_best,
                             output_dir=output_dir, info_only=info_only)
@@ -128,17 +129,10 @@ def netease_download(url, output_dir = '.', merge = True, info_only = False, **k
         src = r1(r'<source src="([^"]+)"', html) or r1(r'<source type="[^"]+" src="([^"]+)"', html)
 
         if src:
-            sd_url = r1(r'(.+)-mobile.mp4', src) + ".flv"
-            _, _, sd_size = url_info(sd_url)
-
-            hd_url = re.sub('/SD/', '/HD/', sd_url)
-            _, _, hd_size = url_info(hd_url)
-
-            if hd_size > sd_size:
-                url, size = hd_url, hd_size
-            else:
-                url, size = sd_url, sd_size
-            ext = 'flv'
+            url = src
+            _, ext, size = url_info(src)
+            #sd_url = r1(r'(.+)-mobile.mp4', src) + ".flv"
+            #hd_url = re.sub('/SD/', '/HD/', sd_url)
 
         else:
             url = (r1(r'["\'](.+)-list.m3u8["\']', html) or r1(r'["\'](.+).m3u8["\']', html)) + ".mp4"
@@ -165,9 +159,9 @@ def encrypted_id(dfsId):
     return result
 
 
-def make_url(dfsId):
+def make_url(songNet, dfsId):
     encId = encrypted_id(dfsId)
-    mp3_url = "http://m5.music.126.net/%s/%s.mp3" % (encId, dfsId)
+    mp3_url = "http://%s/%s/%s.mp3" % (songNet, encId, dfsId)
     return mp3_url
 
 
