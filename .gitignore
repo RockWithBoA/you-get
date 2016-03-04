@@ -79,3 +79,10 @@ _*
 *.ts
 *.webm
 *.xml
+
+urls.txt
+*.orig
+*.gitignore_BACKUP*
+*.gitignore_LOCAL*
+*.gitignore_BASE*
+*.gitignore_REMOTE*

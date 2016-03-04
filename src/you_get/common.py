@@ -668,7 +668,9 @@ def download_urls(urls, title, ext, total_size, output_dir='.', refer=None, merg
         json_output_.download_urls(urls=urls, title=title, ext=ext, total_size=total_size, refer=refer)
         return
     if dry_run:
-        print('Real URLs:\n%s' % '\n'.join(urls))
+        with open('urls.txt', 'w') as real_urls:
+            print('\n'.join(urls), file=real_urls)
+        # print('Real URLs:\n%s' % '\n'.join(urls))
         return
 
     if player:
