@@ -24,6 +24,7 @@ SITES = {
     'fun'              : 'funshion',
     'google'           : 'google',
     'heavy-music'      : 'heavymusic',
+    'huaban'           : 'huaban',
     'iask'             : 'sina',
     'ifeng'            : 'ifeng',
     'imgur'            : 'imgur',
@@ -90,6 +91,7 @@ SITES = {
 import getopt
 import json
 import locale
+import logging
 import os
 import platform
 import re
@@ -296,6 +298,8 @@ def get_content(url, headers={}, decoded=True):
     Returns:
         The content as a string.
     """
+
+    logging.debug('get_content: %s' % url)
 
     req = request.Request(url, headers=headers)
     if cookies:
@@ -1033,6 +1037,8 @@ def script_main(script_name, download, download_playlist, **kwargs):
               % get_version(kwargs['repo_path']
             if 'repo_path' in kwargs else __version__))
 
+    logging.basicConfig(format='[%(levelname)s] %(message)s')
+
     help = 'Usage: %s [OPTION]... [URL]...\n\n' % script_name
     help += '''Startup options:
     -V | --version                      Print version and exit.
@@ -1056,7 +1062,7 @@ def script_main(script_name, download, download_playlist, **kwargs):
     -x | --http-proxy <HOST:PORT>       Use an HTTP proxy for downloading.
     -y | --extractor-proxy <HOST:PORT>  Use an HTTP proxy for extracting only.
          --no-proxy                     Never use a proxy.
-    -d | --debug                        Show traceback for debugging.
+    -d | --debug                        Show traceback and other debug info.
     '''
 
     short_opts = 'Vhfiuc:ndF:O:o:p:x:y:'
@@ -1146,6 +1152,8 @@ def script_main(script_name, download, download_playlist, **kwargs):
             proxy = ''
         elif o in ('-d', '--debug'):
             traceback = True
+            # Set level of root logger to DEBUG
+            logging.getLogger().setLevel(logging.DEBUG)
         elif o in ('-F', '--format', '--stream', '--itag'):
             stream_id = a
         elif o in ('-O', '--output-filename'):

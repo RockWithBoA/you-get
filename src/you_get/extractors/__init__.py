@@ -7,6 +7,7 @@ from .baidu import *
 from .bandcamp import *
 from .bilibili import *
 from .cbs import *
+from .ckplayer import *
 from .cntv import *
 from .dailymotion import *
 from .dilidili import *
@@ -20,6 +21,7 @@ from .freesound import *
 from .funshion import *
 from .google import *
 from .heavymusic import *
+from .huaban import *
 from .ifeng import *
 from .imgur import *
 from .infoq import *

@@ -79,7 +79,8 @@ _*
 *.ts
 *.webm
 *.xml
-
+/.env
+/.idea
 urls.txt
 *.orig
 *.gitignore_BACKUP*
